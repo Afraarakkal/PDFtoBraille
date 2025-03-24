@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Braille Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>/* Google Font for Sleek Look */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        /* Global Styles */
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #0a0f1f; /* Deep dark blue for cyberpunk theme */
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Neon Container */
+        .container {
+            background: rgba(255, 255, 255, 0.08); /* Subtle glass effect */
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            width: 400px;
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        /* Neon Heading */
+        h2 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #00eaff;
+            text-shadow: 0 0 15px rgba(0, 234, 255, 0.8);
+        }
+        
+        /* File Input Styling */
+        input[type="file"] {
+            display: none; /* Hide default file input */
+        }
+        
+        /* Custom File Upload Button */
+        .custom-file-upload {
+            display: inline-block;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #00eaff;
+            background: transparent;
+            border: 2px solid #00eaff;
+            border-radius: 10px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.8);
+            transition: 0.3s ease-in-out;
+        }
+        
+        /* Glow Effect on Hover */
+        .custom-file-upload:hover {
+            background: #00eaff;
+            color: #121212;
+            box-shadow: 0 0 15px #00eaff;
+        }
+        
+        /* Selected File Name */
+        #file-name {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #00ffcc;
+        }
+        
+        /* Neon Button */
+        button {
+            font-size: 1.4rem;
+            padding: 12px 30px;
+            border: 2px solid #00eaff;
+            border-radius: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: transparent;
+            color: #00eaff;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s ease-in-out;
+            margin-top: 15px;
+        }
+        
+        /* Hover Glow Effect */
+        button:hover {
+            color: #121212;
+            background: #00eaff;
+            box-shadow: 0px 0px 15px rgba(0, 234, 255, 0.8);
+        }
+        
+        /* Active Button Effect */
+        button:active {
+            transform: scale(0.95);
+        }
+        </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Braille Converter</h2>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <label for="file-upload" class="custom-file-upload">
+                Choose File
+            </label>
+            <input id="file-upload" type="file" name="file" required>
+            <span id="file-name">No file chosen</span>
+            <button type="submit">Convert</button>
+        </form>
+    </div>
+
+    <script>
+        // Show selected file name
+        document.getElementById("file-upload").addEventListener("change", function() {
+            let fileName = this.files.length > 0 ? this.files[0].name : "No file chosen";
+            document.getElementById("file-name").textContent = fileName;
+        });
+    </script>
+</body>
+</html>
+
